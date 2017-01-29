@@ -7,6 +7,6 @@ namespace CalcTest
     [TestClass]
     public abstract class TestBase
     {
-        protected static ICalculator Calc;
+        protected static readonly ICalculator Calc = new CalculatorFactory(CalcSource.Chrome).GetInstance();
     }
 }

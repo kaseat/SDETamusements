@@ -1,5 +1,4 @@
 ﻿using CalcFramework.Abstract;
-using CalcFramework.Concrete;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CalcTest
@@ -7,10 +6,6 @@ namespace CalcTest
     [TestClass]
     public class CalculatorTest : TestBase
     {
-        [ClassInitialize]
-        public static void Setup(TestContext context) =>
-            Calc = new CalculatorFactory(CalcSource.Chrome).GetInstance();
-
         [TestMethod]
         public void CheckIfThereAreNineteenButtons()
             => Assert.AreEqual(19, Calc.GetButtonCount());
