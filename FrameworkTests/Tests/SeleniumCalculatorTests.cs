@@ -30,6 +30,5 @@ namespace FrameworkTests.Tests
             calc.GetButton(Button.Zero).Click();
             Assert.IsTrue(methodCalled);
         }
-
     }
 }

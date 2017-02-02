@@ -4,7 +4,7 @@ using OpenQA.Selenium;
 
 namespace CalcFramework.Concrete
 {
-    public class SeleniumButton : IButton
+    public sealed class SeleniumButton : IButton
     {
         private readonly IWebElement wElement;
 

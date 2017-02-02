@@ -7,6 +7,20 @@ namespace CalcTest
     [TestClass]
     public abstract class TestBase
     {
-        protected static readonly ICalculator Calc = new CalculatorFactory(CalcSource.Chrome).GetInstance();
+        private static CalculatorFactory _cFact;
+        protected static ICalculator Calc;
+
+        [AssemblyInitialize]
+        public static void Setup(TestContext context)
+        {
+            _cFact = new CalculatorFactory(CalcSource.Chrome);
+            Calc= _cFact.GetInstance();
+        }
+
+        [AssemblyCleanup]
+        public static void Cleanup()
+        {
+            _cFact.Dispose();
+        }
     }
 }

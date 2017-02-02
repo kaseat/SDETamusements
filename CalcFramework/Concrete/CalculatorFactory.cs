@@ -8,8 +8,9 @@ namespace CalcFramework.Concrete
     /// <summary>
     /// Represents calculator factory.
     /// </summary>
-    public class CalculatorFactory
+    public sealed class CalculatorFactory:IDisposable
     {
+        private Boolean isDisposed;
         private readonly IWebDriver driver;
         private readonly ICalculator calculator;
 
@@ -31,8 +32,18 @@ namespace CalcFramework.Concrete
 
         ~CalculatorFactory()
         {
+            Dispose();
+            GC.SuppressFinalize(this);
+        }
+
+        public void Dispose()
+        {
+            if (isDisposed || driver == null) return;
+
             driver.Quit();
             driver.Dispose();
+
+            isDisposed = true;
         }
 
         /// <summary>
