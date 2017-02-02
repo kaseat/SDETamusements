@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalcFramework", "CalcFramew
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalcTest", "CalcTest\CalcTest.csproj", "{A32FE4B0-BC70-46F1-89E6-1563BB92881C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrameworkTests", "FrameworkTests\FrameworkTests.csproj", "{5707315D-DD59-4536-866C-63B02B3C9FDC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A32FE4B0-BC70-46F1-89E6-1563BB92881C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A32FE4B0-BC70-46F1-89E6-1563BB92881C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A32FE4B0-BC70-46F1-89E6-1563BB92881C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5707315D-DD59-4536-866C-63B02B3C9FDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5707315D-DD59-4536-866C-63B02B3C9FDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5707315D-DD59-4536-866C-63B02B3C9FDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5707315D-DD59-4536-866C-63B02B3C9FDC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
