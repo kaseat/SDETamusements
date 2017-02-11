@@ -14,7 +14,6 @@ namespace CalcFramework.Concrete
         }
 
         public String Text => wElement.GetAttribute(Driver.ValueToken);
-        public Boolean IsSelected => wElement.Selected;
 
         public void Click() => wElement.Click();
     }

@@ -12,10 +12,6 @@ namespace CalcFramework.Abstract
         /// </summary>
         String Text { get; }
 
-        /// <summary>
-        /// Is the button selected.
-        /// </summary>
-        Boolean IsSelected { get; }
 
         /// <summary>
         /// Click the button.

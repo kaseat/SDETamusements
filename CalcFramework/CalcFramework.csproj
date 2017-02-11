@@ -32,8 +32,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Interop.UIAutomationClient, Version=12.0.20617.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\UIAComWrapper.1.1.0.14\lib\net40\Interop.UIAutomationClient.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="UIAComWrapper, Version=1.1.0.14, Culture=neutral, PublicKeyToken=78cbcf77433a85e5, processorArchitecture=MSIL">
+      <HintPath>..\packages\UIAComWrapper.1.1.0.14\lib\net40\UIAComWrapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="WebDriver, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Selenium.WebDriver.3.0.1\lib\net40\WebDriver.dll</HintPath>
       <Private>True</Private>
@@ -44,16 +52,27 @@
     <Compile Include="Abstract\IButton.cs" />
     <Compile Include="Abstract\ICalculator.cs" />
     <Compile Include="Concrete\CalcSource.cs" />
+    <Compile Include="Concrete\ChromeCalculatorProvider.cs" />
     <Compile Include="Concrete\SeleniumCalculator.cs" />
     <Compile Include="Concrete\SeleniumButton.cs" />
     <Compile Include="Concrete\CalculatorFactory.cs" />
+    <Compile Include="Concrete\WindowsButton.cs" />
+    <Compile Include="Concrete\WindowsCalculator.cs" />
+    <Compile Include="Concrete\WindowsCalculatorProvider.cs" />
     <Compile Include="Driver.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Driver.resx</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Const.cs" />
     <Compile Include="Helpers\EnumHelpers.cs" />
+    <Compile Include="Helpers\WinHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Win.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Win.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -64,6 +83,13 @@
       <LastGenOutput>Driver.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Win.ja.resx" />
+    <EmbeddedResource Include="Win.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Win.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Win.ru.resx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\packages\Chromium.ChromeDriver.2.27\content\chromedriver.exe">

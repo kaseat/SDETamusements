@@ -1,14 +1,22 @@
-﻿using CalcFramework.Abstract;
+﻿using System.Globalization;
+using CalcFramework.Abstract;
+using CalcFramework.Concrete;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CalcTest
 {
     [TestClass]
-    public class CalculatorTest : TestBase
+    public class WinCalcTest
     {
+        private static readonly CalculatorFactory Factory = new CalculatorFactory(CalcSource.Windows);
+        private static readonly ICalculator Calc = Factory.GetInstance();
+
+        [TestInitialize]
+        public void Initialize() => Calc.GetButton(Button.Clr).Click();
+
         [TestMethod]
-        public void CheckIfThereAreNineteenButtons()
-            => Assert.AreEqual(19, Calc.GetButtonCount());
+        public void CheckIfThereAreTwentyEightButtons()
+            => Assert.AreEqual(28, Calc.GetButtonCount());
 
         [TestMethod]
         public void CheckIfOnePlusFourEqualsFive()
@@ -29,7 +37,7 @@ namespace CalcTest
             Calc.GetButton(Button.Five).Click();
             Calc.GetButton(Button.Eq).Click();
 
-            Assert.AreEqual("-3", Calc.GetScreenText());
+            Assert.AreEqual((-3).ToString(CultureInfo.CurrentCulture), Calc.GetScreenText());
         }
 
         [TestMethod]
@@ -40,7 +48,7 @@ namespace CalcTest
             Calc.GetButton(Button.Seven).Click();
             Calc.GetButton(Button.Eq).Click();
 
-            Assert.AreEqual("21", Calc.GetScreenText());
+            Assert.AreEqual(21.ToString(CultureInfo.CurrentCulture), Calc.GetScreenText());
         }
 
         [TestMethod]
@@ -51,7 +59,7 @@ namespace CalcTest
             Calc.GetButton(Button.Six).Click();
             Calc.GetButton(Button.Eq).Click();
 
-            Assert.AreEqual("1.5", Calc.GetScreenText());
+            Assert.AreEqual(1.5.ToString(CultureInfo.CurrentCulture), Calc.GetScreenText());
         }
 
         [TestMethod]
@@ -65,7 +73,7 @@ namespace CalcTest
             Calc.GetButton(Button.Pers).Click();
             Calc.GetButton(Button.Eq).Click();
 
-            Assert.AreEqual("2", Calc.GetScreenText());
+            Assert.AreEqual(2.ToString(CultureInfo.CurrentCulture), Calc.GetScreenText());
         }
 
         [TestMethod]
@@ -75,7 +83,7 @@ namespace CalcTest
             Calc.GetButton(Button.Sqr).Click();
             Calc.GetButton(Button.Eq).Click();
 
-            Assert.AreEqual("3", Calc.GetScreenText());
+            Assert.AreEqual(3.ToString(CultureInfo.CurrentCulture), Calc.GetScreenText());
         }
 
         [TestMethod]
@@ -84,7 +92,7 @@ namespace CalcTest
             Calc.GetButton(Button.Nine).Click();
             Calc.GetButton(Button.Clr).Click();
 
-            Assert.AreEqual("0", Calc.GetScreenText());
+            Assert.AreEqual(0.ToString(CultureInfo.CurrentCulture), Calc.GetScreenText());
         }
 
         [TestMethod]
@@ -95,7 +103,7 @@ namespace CalcTest
             Calc.GetButton(Button.Zero).Click();
             Calc.GetButton(Button.Eq).Click();
 
-            Assert.AreEqual("Infinity", Calc.GetScreenText());
+            Assert.AreEqual(Asserts.ZeroDiv, Calc.GetScreenText());
         }
 
         [TestMethod]
@@ -106,7 +114,7 @@ namespace CalcTest
             Calc.GetButton(Button.Nine).Click();
             Calc.GetButton(Button.Eq).Click();
 
-            Assert.AreEqual("0", Calc.GetScreenText());
+            Assert.AreEqual(0.ToString(CultureInfo.CurrentCulture), Calc.GetScreenText());
         }
 
         [TestMethod]
@@ -117,7 +125,7 @@ namespace CalcTest
             Calc.GetButton(Button.Zero).Click();
             Calc.GetButton(Button.Eq).Click();
 
-            Assert.AreEqual("NaN", Calc.GetScreenText());
+            Assert.AreEqual(Asserts.UndefRes, Calc.GetScreenText());
         }
 
         [TestMethod]
@@ -132,7 +140,7 @@ namespace CalcTest
             Calc.GetButton(Button.Two).Click();
             Calc.GetButton(Button.Eq).Click();
 
-            Assert.AreEqual("-2.5", Calc.GetScreenText());
+            Assert.AreEqual((-2.5).ToString(CultureInfo.CurrentCulture), Calc.GetScreenText());
         }
 
         [TestMethod]
@@ -146,7 +154,7 @@ namespace CalcTest
             Calc.GetButton(Button.Eight).Click();
             Calc.GetButton(Button.Eq).Click();
 
-            Assert.AreEqual("-48", Calc.GetScreenText());
+            Assert.AreEqual((-48).ToString(CultureInfo.CurrentCulture), Calc.GetScreenText());
         }
 
         [TestMethod]
@@ -159,11 +167,11 @@ namespace CalcTest
             Calc.GetButton(Button.Two).Click();
             Calc.GetButton(Button.Eq).Click();
 
-            Assert.AreEqual("8", Calc.GetScreenText());
+            Assert.AreEqual(8.ToString(CultureInfo.CurrentCulture), Calc.GetScreenText());
         }
 
         [TestMethod]
-        public void VerifyThatOnPressingTwoOperatorsOneAfterTheOtherTheLatestOneWillNotOverrideThePreviousOperator()
+        public void VerifyThatOnPressingTwoOperatorsOneAfterTheOtherTheLatestOneWillOverrideThePreviousOperator()
         {
             Calc.GetButton(Button.Two).Click();
             Calc.GetButton(Button.Div).Click();
@@ -171,7 +179,7 @@ namespace CalcTest
             Calc.GetButton(Button.Two).Click();
             Calc.GetButton(Button.Eq).Click();
 
-            Assert.AreEqual("1", Calc.GetScreenText());
+            Assert.AreEqual(4.ToString(CultureInfo.CurrentCulture), Calc.GetScreenText());
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using CalcFramework.Abstract;
 
 namespace CalcFramework.Helpers
 {
@@ -24,6 +25,17 @@ namespace CalcFramework.Helpers
             if (memberInfo.Length <= 0) return enumerationValue.ToString();
             var attrs = memberInfo[0].GetCustomAttributes(typeof(DescriptionAttribute), false);
             return attrs.Length > 0 ? ((DescriptionAttribute) attrs[0]).Description : enumerationValue.ToString();
+        }
+
+        public static String GetAutomationId(this Button enumerationValue)
+        {
+            String[] mapper =
+            {
+                "93", "94", "91", "92", "110", "121", "118", "81", "84", "131", "132", "133", "134",
+                "135", "136", "137", "138", "139", "130"
+            };
+            
+            return mapper[(Int32)enumerationValue];
         }
     }
 }

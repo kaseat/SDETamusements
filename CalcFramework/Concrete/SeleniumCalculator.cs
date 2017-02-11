@@ -7,7 +7,7 @@ using OpenQA.Selenium;
 
 namespace CalcFramework.Concrete
 {
-    public sealed class SeleniumCalculator : ICalculator
+    public class SeleniumCalculator : ICalculator
     {
         private readonly IWebDriver driver;
 

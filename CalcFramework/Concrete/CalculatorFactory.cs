@@ -1,33 +1,38 @@
 ﻿using System;
+using System.Diagnostics;
 using CalcFramework.Abstract;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 
 namespace CalcFramework.Concrete
 {
     /// <summary>
     /// Represents calculator factory.
     /// </summary>
-    public sealed class CalculatorFactory:IDisposable
+    public sealed class CalculatorFactory : IDisposable
     {
         private Boolean isDisposed;
         private readonly IWebDriver driver;
         private readonly ICalculator calculator;
+        private readonly Process calcProcess;
 
         /// <summary>
-        /// Initialize fctory with selected calculator.
+        /// Initialize factory with selected calculator.
         /// </summary>
         /// <param name="src">Calculator source.</param>
         public CalculatorFactory(CalcSource src)
         {
-            calculator = src == CalcSource.Chrome ?
-                new SeleniumCalculator(driver = new ChromeDriver()) : null;
-            if(calculator==null)
-                throw new NotImplementedException(Driver.FactoryException);
-
-            driver.Navigate().GoToUrl(Driver.url);
-            driver.Manage().Timeouts().SetPageLoadTimeout
-                (TimeSpan.FromSeconds(Double.Parse(Driver.Timeout)));
+            switch (src)
+            {
+                case CalcSource.Chrome:
+                    calculator = new SeleniumCalculator(driver = ChromeCalculatorProvider.GetInstance());
+                    break;
+                case CalcSource.Windows:
+                    calcProcess = Process.Start(Win.ProcessName);
+                    calculator = new WindowsCalculator(WindowsCalculatorProvider.GetInstance());
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(src), src, null);
+            }
         }
 
         ~CalculatorFactory()
@@ -38,10 +43,11 @@ namespace CalcFramework.Concrete
 
         public void Dispose()
         {
-            if (isDisposed || driver == null) return;
+            if (isDisposed) return;
 
-            driver.Quit();
-            driver.Dispose();
+            driver?.Quit();
+            calcProcess?.CloseMainWindow();
+            calcProcess?.Close();
 
             isDisposed = true;
         }
